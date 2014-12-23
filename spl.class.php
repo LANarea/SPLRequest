@@ -22,7 +22,17 @@ class SplCollection
 	{
 		if(!isset($save_to_path)) {
 			return "No path given";
-		} else {
+		}
+		elseif(!is_dir($save_to_path))
+		{
+			return "Given path isn't a valid directory, please create the following directory: " . $save_to_path;
+		}
+		elseif(!is_writable($save_to_path))
+		{
+			return "Given path isn't a writable directory, please chmod the directory to 775 or 777";
+		}
+		else
+		{
 			return "Lib built";
 		}
 	}
