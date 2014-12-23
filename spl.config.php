@@ -10,7 +10,7 @@ return [
 	'expire' => 0, // Request location: 0=no, 1=yes, 2=required
 	'requestsperhour' => 150, // Max number of requests allowed per hour for each listener
 	'requestsperday' => 1000, // Max number of requests allowed per day for each listener
-	'rebuild_interval' => -1, // Hours between local library rebuilds. 0=disabled, -1=manual rebuild
+	'rebuild_interval' => -1, // Hours between local library rebuilds. 0=disabled/manual
 	'use_database' => 0, // Use the database, or files. 0=disabled (files, see 'libdir'), 1=enabled (database, see 'database_credentials')
 	'database_credentials' => [
 		'db_host' => 'localhost',
