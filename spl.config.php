@@ -1,5 +1,4 @@
 <?php
-
 return [
 	'server_ip' => '0.0.0.0', // Domain name or IP address of SPL Studio server
 	'server_port' => 0, // Port# assigned in SPL Studio to listen for commands
