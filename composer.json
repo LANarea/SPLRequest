@@ -1,0 +1,16 @@
+{
+	"name": "LANarea/SPLRequest",
+	"description": "A clean request script for use with Station Playlist",
+	"keywords": ["station", "playlist", "request"],
+	"homepage": "https://github.com/LANarea/SPLRequest",
+	"license": ["BSD-3-Clause"],
+	"authors": [
+		{
+			"name": "Ken Verhaegen",
+			"homepage": "http://kenne.be"
+		}
+	],
+	"autoload": {
+		"classmap": ["src/"]
+	}
+}
