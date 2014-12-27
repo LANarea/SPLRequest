@@ -1,8 +1,3 @@
-SPLRequest
-==========
-
-A request script for Station Playlist.
-
 [SPLRequest](https://github.com/LANarea/SPLRequest)
 ================================
 
