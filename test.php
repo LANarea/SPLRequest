@@ -2,13 +2,15 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-define('DS', DIRECTORY_SEPARATOR);
+define('DS',DIRECTORY_SEPARATOR);
 
-use LANarea;
 
-require __DIR__ . DS . 'src' . DS . 'spl.class.php';
+use StationPlaylist as SPL;
 
-$config_file_path = __DIR__ . DS . 'spl.config.php';
+require __DIR__ . DS . 'spl.class.php';
 
-$spl = new LANarea\SPLRequest($config_file_path);
+$spl = new SPL\SplCollection();
 echo $spl->buildLibrary($spl->config['libdir']);
+
+// var_dump($spl);
+// $spl->
