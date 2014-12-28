@@ -22,17 +22,49 @@ class SPLRequest
 	
 	public function search($s)
 	{
-		return $this->doQuery('Search='.$s);
+		return $this->processSongs($this->doQuery('Search='.$s));
 	}
 	
 	public function getAllSongs()
 	{
-		return $this->search('*'); // Simple, huh?
+		return $this->processSongs($this->search('*')); // Simple, huh?
+	}
+	
+	private function processSongs((array)$songs){
+		$newList = array();
+	
+		for ($i = 0; $i < count($songs); $i++) {
+			if (empty($songs[$i]))
+				next;
+			list($artist, $title, $filepath) = explode("|", $songs[$i]);
+			$newList[] = array(
+							'artist' => $artist,
+							'title' => $title,
+							'filepath' => $filepath
+						);
+		}
+		return $newList;
 	}
 	
 	public function getRequests()
 	{
-		return $this->doQuery('List requests');
+		return $this->processRequests($this->doQuery('List requests'));
+	}
+	
+	private function processRequests((array)$requests){
+		$newList = array();
+	
+		for ($i = 0; $i < count($requests); $i++) {
+			if (empty($requests[$i]))
+				next;
+			list($timestamp, $artist, $title) = explode("|", $requests[$i]);
+			$newList[] = array(
+							'ts' => $timestamp,
+							'artist' => $artist,
+							'title' => $title
+						);
+		}
+		return $newList;
 	}
 	
 	public function setIp((string)$server_ip)
