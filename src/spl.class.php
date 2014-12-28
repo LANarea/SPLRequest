@@ -27,7 +27,7 @@ class SPLRequest
     
     public function getAllSongs()
     {
-        return $this->processSongs($this->search('*')); // Simple, huh?
+        return $this->search('*'); // Simple, huh?
     }
     
     private function processSongs($songs)
