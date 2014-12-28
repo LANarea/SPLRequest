@@ -71,6 +71,24 @@ class SPLRequest
         return $newList;
     }
     
+    public function doRequest($filepath = NULL, $name = NULL, $location = NULL)
+    {
+        if (NULL !== $filepath)
+        {
+            return false;
+        }
+        
+        $command = "Insert Request=" . $filepath . "|" . $_SERVER["REMOTE_ADDR"];
+        if ($namefield || $locationfield)
+        {
+            $command .= "|" . $name . "|" . $location;
+        }
+        
+        // To be continued
+        
+        return doQuery($command);
+    }
+    
     public function setIp($server_ip)
     {
         $this->server_ip = $server_ip;
