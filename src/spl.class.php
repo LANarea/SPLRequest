@@ -50,7 +50,7 @@ class SPLRequest
 	private function doQuery($command=null)
 	{
 		if(NULL !== $command) {
-			$command = $command . "\r\n"; //Adding NEWLINE to command
+			$command .= "\r\n"; // Adding the vital NewLine to the given command
 			$fp      = fsockopen($this->server_ip, $this->server_port, $errno, $errstr, 10);
 			if ($fp !== false) {
 				fwrite($fp, $command);
@@ -61,10 +61,10 @@ class SPLRequest
 				}
 				fclose($fp);
 			} else {
-				throw new SPLRequestException('ERROR $errno: $errstr\r\n');
+				throw new SPLRequestException('SPLRequest Error\r\n'.$errno.': '.$errstr.'\r\n');
 			}
 		} else {
-			throw new SPLRequestException('No command given.');
+			throw new SPLRequestException('No valid command given.');
 		}
 		return $data;
 	}
