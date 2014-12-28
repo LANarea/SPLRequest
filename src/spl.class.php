@@ -10,97 +10,108 @@ namespace LANarea;
  */
 class SPLRequest
 {
-	
-	private $server_ip = null;
-	private $server_port = null;
-
-	public function __construct($server_ip,$server_port)
-	{
-		$this->setIp($server_ip);
-		$this->setPort($server_port);
-	}
-	
-	public function search($s)
-	{
-		return $this->processSongs($this->doQuery('Search='.$s));
-	}
-	
-	public function getAllSongs()
-	{
-		return $this->processSongs($this->search('*')); // Simple, huh?
-	}
-	
-	private function processSongs((array)$songs){
-		$newList = array();
-	
-		for ($i = 0; $i < count($songs); $i++) {
-			if (empty($songs[$i]))
-				next;
-			list($artist, $title, $filepath) = explode("|", $songs[$i]);
-			$newList[] = array(
-							'artist' => $artist,
-							'title' => $title,
-							'filepath' => $filepath
-						);
-		}
-		return $newList;
-	}
-	
-	public function getRequests()
-	{
-		return $this->processRequests($this->doQuery('List requests'));
-	}
-	
-	private function processRequests((array)$requests){
-		$newList = array();
-	
-		for ($i = 0; $i < count($requests); $i++) {
-			if (empty($requests[$i]))
-				next;
-			list($timestamp, $artist, $title) = explode("|", $requests[$i]);
-			$newList[] = array(
-							'ts' => $timestamp,
-							'artist' => $artist,
-							'title' => $title
-						);
-		}
-		return $newList;
-	}
-	
-	public function setIp((string)$server_ip)
-	{
-		$this->server_ip = $server_ip;
-		return true;
-	}
-	
-	public function setPort((int)$server_port)
-	{
-		$this->server_port = $server_port;
-		return true;
-	}
-	
-	private function doQuery($command=null)
-	{
-		if(NULL !== $command) {
-			$command .= "\r\n"; // Adding the vital NewLine to the given command
-			$fp      = fsockopen($this->server_ip, $this->server_port, $errno, $errstr, 10);
-			if ($fp !== false) {
-				fwrite($fp, $command);
-				$buffer = trim(fgets($fp));
-				while (!empty($buffer) && ($buffer != "OK")) {
-					$data[] = $buffer;
-					$buffer = trim(fgets($fp));
-				}
-				fclose($fp);
-			} else {
-				throw new SPLRequestException('SPLRequest Error\r\n'.$errno.': '.$errstr.'\r\n');
-			}
-		} else {
-			throw new SPLRequestException('No valid command given.');
-		}
-		return $data;
-	}
-
+    
+    private $server_ip = null;
+    private $server_port = null;
+    
+    public function __construct($server_ip, $server_port)
+    {
+        $this->setIp($server_ip);
+        $this->setPort($server_port);
+    }
+    
+    public function search($s)
+    {
+        return $this->processSongs($this->doQuery('Search=' . $s));
+    }
+    
+    public function getAllSongs()
+    {
+        return $this->processSongs($this->search('*')); // Simple, huh?
+    }
+    
+    private function processSongs($songs)
+    {
+        $newList = array();
+        
+        for ($i = 0; $i < count($songs); $i++)
+        {
+            if (empty($songs[$i]))
+                next;
+            list($artist, $title, $filepath) = explode("|", $songs[$i]);
+            $newList[] = array(
+                'artist' => $artist,
+                'title' => $title,
+                'filepath' => $filepath
+            );
+        }
+        return $newList;
+    }
+    
+    public function getRequests()
+    {
+        return $this->processRequests($this->doQuery('List requests'));
+    }
+    
+    private function processRequests($requests)
+    {
+        $newList = array();
+        
+        for ($i = 0; $i < count($requests); $i++)
+        {
+            if (empty($requests[$i]))
+                next;
+            list($timestamp, $artist, $title) = explode("|", $requests[$i]);
+            $newList[] = array(
+                'ts' => $timestamp,
+                'artist' => $artist,
+                'title' => $title
+            );
+        }
+        return $newList;
+    }
+    
+    public function setIp($server_ip)
+    {
+        $this->server_ip = $server_ip;
+        return true;
+    }
+    
+    public function setPort($server_port)
+    {
+        $this->server_port = $server_port;
+        return true;
+    }
+    
+    private function doQuery($command = null)
+    {
+        if (NULL !== $command)
+        {
+            $command .= "\r\n"; // Adding the vital NewLine to the given command
+            $fp = fsockopen($this->server_ip, $this->server_port, $errno, $errstr, 10);
+            if ($fp !== false)
+            {
+                fwrite($fp, $command);
+                $buffer = trim(fgets($fp));
+                while (!empty($buffer) && ($buffer != "OK"))
+                {
+                    $data[] = $buffer;
+                    $buffer = trim(fgets($fp));
+                }
+                fclose($fp);
+            }
+            else
+            {
+                throw new SPLRequestException('SPLRequest Error\r\n' . $errno . ': ' . $errstr . '\r\n');
+            }
+        }
+        else
+        {
+            throw new SPLRequestException('No valid command given.');
+        }
+        return $data;
+    }
+    
 }
 
 /**
