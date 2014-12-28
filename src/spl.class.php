@@ -27,7 +27,7 @@ class SPLRequest
 	
 	public function getAllSongs()
 	{
-		return $this->doQuery('Search=*');
+		return $this->search('*'); // Simple, huh?
 	}
 	
 	public function getRequests()
