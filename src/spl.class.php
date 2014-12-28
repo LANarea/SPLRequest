@@ -71,7 +71,7 @@ class SPLRequest
         return $newList;
     }
     
-    public function doRequest($filepath = NULL, $name = NULL, $location = NULL)
+    public function doRequest($filepath = "", $name = "", $location = "")
     {
         if (NULL !== $filepath)
         {
@@ -79,12 +79,12 @@ class SPLRequest
         }
         
         $command = "Insert Request=" . $filepath . "|" . $_SERVER["REMOTE_ADDR"];
-        if ($namefield || $locationfield)
+        if ($name || $location)
         {
-            $command .= "|" . $name . "|" . $location;
+            $command .= '|' . $name . '|' . $location;
         }
         
-        // To be continued
+        // To be continued (Need to check the output of doQuery)
         
         return doQuery($command);
     }
