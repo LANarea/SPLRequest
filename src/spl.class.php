@@ -11,8 +11,8 @@ namespace LANarea;
 class SPLRequest
 {
     
-    private $server_ip = null;
-    private $server_port = null;
+    private $server_ip = NULL;
+    private $server_port = NULL;
     
     public function __construct($server_ip, $server_port)
     {
@@ -75,7 +75,7 @@ class SPLRequest
     
     public function doRequest($filepath = NULL, $name = "", $location = "")
     {
-        if (NULL !== $filepath)
+        if (is_null($filepath))
         {
             return false;
         }
@@ -88,7 +88,7 @@ class SPLRequest
         
         // To be continued (Need to check the output of doQuery)
         
-        return doQuery($command);
+        return ($this->doQuery($command) == "Thank you! Your request has been submitted.") ? true : false;
     }
     
     public function setIp($server_ip)
@@ -103,11 +103,11 @@ class SPLRequest
         return true;
     }
     
-    private function doQuery($command = null, $multi = false)
+    private function doQuery($command = NULL, $multi = false)
     {
     
-        if (NULL !== $command)
-        {   
+        if (!is_null($command) && !empty($command))
+        {
             $data = array();
             $command = rawurldecode($command);
             if (get_magic_quotes_gpc ())
@@ -120,7 +120,6 @@ class SPLRequest
             {
                 fwrite($fp, $command);
                 $buffer = trim(fgets($fp));
-                var_dump($buffer);
                 if($multi === true || is_string($multi))
                 {
                     $stopmsg = is_string($multi) ? $multi : "OK";
