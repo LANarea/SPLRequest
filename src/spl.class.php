@@ -27,7 +27,7 @@ class SPLRequest
     
     public function search($s)
     {
-        return $this->processSongs($this->doQuery('Search=*' . $s . '*', 'Not Found'));
+        return $this->processSongs($this->doQuery('Search=' . $s, 'Not Found'));
     }
     
     private function processSongs($songs)
