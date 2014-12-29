@@ -7,29 +7,64 @@ namespace LANarea;
  * @author Ken Verhaegen <contact@kenverhaegen.be>
  * @copyright 2014 LANarea
  * @license BSD-3-Clause
+ * @version 1.0
  */
 class SPLRequest
 {
-    
+
+    /**
+     * Server IP/Hostname
+     * @access private
+     * @var string
+     */
     private $server_ip = NULL;
+    /**
+     * Server port
+     * @access private
+     * @var int
+     */
     private $server_port = NULL;
     
+    /**
+     * Initialize the class and save the server credentials
+     * @param string $server_ip
+     * @param int $server_port
+     */
     public function __construct($server_ip, $server_port)
     {
         $this->setIp($server_ip);
         $this->setPort($server_port);
     }
-    
+
+    /**
+     * Get all the songs at once
+     * @return array
+     */
     public function getAllSongs()
     {
         return $this->search('*'); // Simple, huh?
     }
     
-    public function search($s)
+    /**
+     * Search for songs
+     *
+     * Use '*' as a wildcard
+     * Use '|' as an endline at the end
+     * 
+     * @param  string $query        The value we need to search for
+     * @return array
+     */
+    public function search($query)
     {
-        return $this->processSongs($this->doQuery('Search=' . $s, 'Not Found'));
+        return $this->processSongs($this->doQuery('Search=' . $query, 'Not Found'));
     }
     
+    /**
+     * Process the songs to have a nicer output of data
+     * @access private
+     * @param  array|string
+     * @return array|string
+     */
     private function processSongs($songs)
     {
         if(!is_array($songs)) return $songs;
@@ -50,11 +85,21 @@ class SPLRequest
         return $newList;
     }
     
+    /**
+     * Get a list of the requests in the waitinglist
+     * @return array
+     */
     public function getRequests()
     {
         return $this->processRequests($this->doQuery('List requests', 'OK'));
     }
-    
+
+    /**
+     * Process the requests to have a nicer output of data
+     * @access private
+     * @param  array $requests
+     * @return array
+     */
     private function processRequests($requests)
     {
         $newList = array();
@@ -73,6 +118,13 @@ class SPLRequest
         return $newList;
     }
     
+    /**
+     * Do the song request to the server and optionally send along the name and/or location
+     * @param  string $filepath             Filepath where the song is located on the local drive
+     * @param  string $name                 Requester's name
+     * @param  string $location             Requester's current location
+     * @return boolean                      Wheter or not the request has succeeded
+     */
     public function doRequest($filepath = NULL, $name = "", $location = "")
     {
         if (is_null($filepath))
@@ -85,24 +137,40 @@ class SPLRequest
         {
             $command .= '|' . $name . '|' . $location;
         }
-        
-        // To be continued (Need to check the output of doQuery)
-        
+                
         return ($this->doQuery($command) == "Thank you! Your request has been submitted.") ? true : false;
     }
     
+    /**
+     * Set the IP of the server
+     * @param string $server_ip             The IP-addres/host where we connect to   
+     */
     public function setIp($server_ip)
     {
         $this->server_ip = $server_ip;
         return true;
     }
     
+    /**
+     * Set the port of the server
+     * @param int $server_port              The port where we connect to
+     */
     public function setPort($server_port)
     {
-        $this->server_port = $server_port;
-        return true;
+        $server_port = intval($server_port);
+        if(is_int($server_port)){
+            $this->server_port = $server_port;
+            return true;
+        }
+        return false;
     }
     
+    /**
+     * doQuery sends the commands and reads the output going to and coming from SPL
+     * @param  string $command              The command we send to SPL
+     * @param  boolean|string $multi        Do we expect multiple output lines from server, can be the "stop-word" as value
+     * @return string|array|boolean         Returns false when failed
+     */
     private function doQuery($command = NULL, $multi = false)
     {
     
