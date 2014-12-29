@@ -20,18 +20,20 @@ class SPLRequest
         $this->setPort($server_port);
     }
     
-    public function search($s)
-    {
-        return $this->processSongs($this->doQuery('Search=' . $s));
-    }
-    
     public function getAllSongs()
     {
         return $this->search('*'); // Simple, huh?
     }
     
+    public function search($s)
+    {
+        return $this->processSongs($this->doQuery('Search=*' . $s . '*', 'Not Found'));
+    }
+    
     private function processSongs($songs)
     {
+        if(!is_array($songs)) return $songs;
+    
         $newList = array();
         
         for ($i = 0; $i < count($songs); $i++)
@@ -50,7 +52,7 @@ class SPLRequest
     
     public function getRequests()
     {
-        return $this->processRequests($this->doQuery('List requests'));
+        return $this->processRequests($this->doQuery('List requests', 'OK'));
     }
     
     private function processRequests($requests)
@@ -86,7 +88,7 @@ class SPLRequest
         
         // To be continued (Need to check the output of doQuery)
         
-        return doQuery($command);
+        return doQuery($command,true);
     }
     
     public function setIp($server_ip)
@@ -101,8 +103,9 @@ class SPLRequest
         return true;
     }
     
-    private function doQuery($command = null)
+    private function doQuery($command = null, $multi = false)
     {
+    
         if (NULL !== $command)
         {
             $command .= "\r\n"; // Adding the vital NewLine to the given command
@@ -111,10 +114,19 @@ class SPLRequest
             {
                 fwrite($fp, $command);
                 $buffer = trim(fgets($fp));
-                while (!empty($buffer) && ($buffer != "OK"))
+                if($multi === true || is_string($multi))
                 {
-                    $data[] = $buffer;
-                    $buffer = trim(fgets($fp));
+                    $stopmsg = is_string($multi) ? $multi : "OK";
+                    while (!empty($buffer) && ($buffer != $stopmsg))
+                    {
+                        $data[] = $buffer;
+                        $buffer = trim(fgets($fp));
+                    }
+                }
+                else
+                {
+                    $data = $buffer;
+                    // $data = fgets ($fp);
                 }
                 fclose($fp);
             }
@@ -127,6 +139,7 @@ class SPLRequest
         {
             throw new SPLRequestException('No valid command given.');
         }
+        
         return $data;
     }
     
