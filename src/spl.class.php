@@ -39,12 +39,12 @@ class SPLRequest
         for ($i = 0; $i < count($songs); $i++)
         {
             if (empty($songs[$i]))
-                next;
+                continue;
             list($artist, $title, $filepath) = explode("|", $songs[$i]);
             $newList[] = array(
-                'artist' => $artist,
-                'title' => $title,
-                'filepath' => $filepath
+                'artist' => trim($artist),
+                'title' => trim($title),
+                'filepath' => trim($filepath)
             );
         }
         return $newList;
@@ -62,18 +62,18 @@ class SPLRequest
         for ($i = 0; $i < count($requests); $i++)
         {
             if (empty($requests[$i]))
-                next;
+                continue;
             list($timestamp, $artist, $title) = explode("|", $requests[$i]);
             $newList[] = array(
-                'ts' => $timestamp,
-                'artist' => $artist,
-                'title' => $title
+                'ts' => trim($timestamp),
+                'artist' => trim($artist),
+                'title' => trim($title)
             );
         }
         return $newList;
     }
     
-    public function doRequest($filepath = "", $name = "", $location = "")
+    public function doRequest($filepath = NULL, $name = "", $location = "")
     {
         if (NULL !== $filepath)
         {
@@ -88,7 +88,7 @@ class SPLRequest
         
         // To be continued (Need to check the output of doQuery)
         
-        return doQuery($command,true);
+        return doQuery($command);
     }
     
     public function setIp($server_ip)
@@ -107,13 +107,20 @@ class SPLRequest
     {
     
         if (NULL !== $command)
-        {
+        {   
+            $data = array();
+            $command = rawurldecode($command);
+            if (get_magic_quotes_gpc ())
+            {
+                $command = stripslashes ($command);
+            }
             $command .= "\r\n"; // Adding the vital NewLine to the given command
-            $fp = fsockopen($this->server_ip, $this->server_port, $errno, $errstr, 10);
+            $fp = fsockopen($this->server_ip, intval($this->server_port), $errno, $errstr, 10);
             if ($fp !== false)
             {
                 fwrite($fp, $command);
                 $buffer = trim(fgets($fp));
+                var_dump($buffer);
                 if($multi === true || is_string($multi))
                 {
                     $stopmsg = is_string($multi) ? $multi : "OK";
@@ -126,7 +133,6 @@ class SPLRequest
                 else
                 {
                     $data = $buffer;
-                    // $data = fgets ($fp);
                 }
                 fclose($fp);
             }
@@ -140,7 +146,7 @@ class SPLRequest
             throw new SPLRequestException('No valid command given.');
         }
         
-        return $data;
+        return !empty($data) ? $data : false;
     }
     
 }
