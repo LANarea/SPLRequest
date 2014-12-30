@@ -52,7 +52,7 @@ use LANarea\SPLRequest;
 
 ---
 
-Make a new SPLRequest object and include the IP-addres/Hostname, and the TCP port:
+Make a new SPLRequest object and include the IP-address/Hostname, and the TCP port:
 ```
 $spl = new SPLRequest('0.0.0.0', 0);
 ```
