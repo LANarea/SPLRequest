@@ -10,7 +10,7 @@ or install it via Composer:
 
 	composer require lanarea/splrequest
 
-or manually
+or manually add it to composer.json:
 
 ```
 {
@@ -19,7 +19,7 @@ or manually
     }
 }
 ```
-	
+
 	
 Preparation
 -----------
