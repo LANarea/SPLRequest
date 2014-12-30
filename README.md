@@ -81,6 +81,7 @@ Note
 -----
 
 You have to implement your own request limits, caching and such.
+
 With this package, you can only handle the data we can get to and from SPL.
 
 
