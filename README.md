@@ -8,7 +8,17 @@ and even do live song requests to the server.
 You can obtain the latest version from our [GitHub repository](https://github.com/LANarea/SPLRequest)
 or install it via Composer:
 
-	composer require LANarea/SPLRequest
+	composer require lanarea/splrequest
+
+or manually
+
+```
+{
+    "require": {
+        "lanarea/splrequest": "dev-master"
+    }
+}
+```
 	
 	
 Preparation
