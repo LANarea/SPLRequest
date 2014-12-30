@@ -46,7 +46,8 @@ $spl = new SPLRequest('0.0.0.0', 0);
 ```
 
 Get all available songs via this operator:
-<small>Might be subject to the "Max Search Results"-setting under the "Communications" tab.</small>
+
+<sub><sup>Might be subject to the "Max Search Results"-setting under the "Communications" tab.</sup></sub>
 ```
 $spl->getAllSongs(); // returns an array of songs
 // The above is the same as:
@@ -56,7 +57,8 @@ $spl->search('*');
 Searching for a song:
 - Use * as a wildcard operator
 - Use | as and end to the query
-Tip: Surround all your queries with the wildcard operator, eg. "*Elvis*"
+
+<sub><sup>Tip: Surround all your queries with the wildcard operator, eg. "*Elvis*"</sup></sub>
 ```
 $allSongs = $spl->search('Avril Lavigne*'); // returns an array, or false
 ```
