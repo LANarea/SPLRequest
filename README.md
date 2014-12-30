@@ -35,7 +35,7 @@ Some (local) settings need to be applied before you can use this script:
 Usage
 -----
 
-Enable the namespace to make use of the class:
+Autoload or include the class, and enable the namespace to make use of the class:
 ```
 use LANarea\SPLRequest;
 ```
