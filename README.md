@@ -40,10 +40,14 @@ Enable the namespace to make use of the class:
 use LANarea\SPLRequest;
 ```
 
+---
+
 Make a new SPLRequest object and include the IP-addres/Hostname, and the TCP port:
 ```
 $spl = new SPLRequest('0.0.0.0', 0);
 ```
+
+---
 
 Get all available songs via this operator:
 
@@ -54,6 +58,8 @@ $spl->search('*');
 ```
 Might be subject to the "Max Search Results"-setting under the "Communications" tab.
 
+---
+
 Searching for a song:
 - Use * as a wildcard operator
 - Use | as and end to the query
@@ -61,6 +67,8 @@ Searching for a song:
 $allSongs = $spl->search('Avril Lavigne*'); // returns an array, or false
 ```
 Tip: Surround all your queries with the wildcard operator, eg. "\*Elvis\*"
+
+---
 
 Do a song request:
 ```
