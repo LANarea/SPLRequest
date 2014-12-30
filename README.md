@@ -2,7 +2,7 @@
 ================================
 
 SPLRequest is a very small PHP library which makes it able to connect
-with Station Playlist Studio, loading all available songs in the library
+with StationPlaylist Studio, loading all available songs in the library
 and even do live song requests to the server.
  
 You can obtain the latest version from our [GitHub repository](https://github.com/LANarea/SPLRequest)
@@ -26,12 +26,12 @@ Preparation
 	
 Some (local) settings need to be applied before you can use this script:
 
-* Open StudioPlaylist Studio,
+* Open StationPlaylist Studio,
 * Open the Options window (Ctrl+O or View > Options)
 
 * Enable the connection with SPL from the outside:
 	* On the left, select the tab named "Communications",
-	* Set the port for TCP connections to Station Playlist Studio
+	* Set the port for TCP connections to StationPlaylist Studio
 	* You don't need to set the "Send Response" value, as far as I know
 	* Optionally, but preferably, set an IP Restriction (to the same IP as where the script is running)
 	* Possibly: Forward the previously mentioned port so it's reachable from your public IP. This option can be found in your Router's settings or via your ISP
