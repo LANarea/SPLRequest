@@ -35,25 +35,25 @@ Some (local) settings need to be applied before you can use this script:
 Usage
 -----
 
-Enable the namespace to make use of the class
+Enable the namespace to make use of the class:
 ```
 use LANarea\SPLRequest;
 ```
 
-Make a new SPLRequest object and include the IP-addres/Hostname, and the TCP port.
+Make a new SPLRequest object and include the IP-addres/Hostname, and the TCP port:
 ```
 $spl = new SPLRequest('0.0.0.0', 0);
 ```
 
-Get all available songs via this operator
-Might be subject to the "Max Search Results" setting under the "Communications" tab.
+Get all available songs via this operator:
+<small>Might be subject to the "Max Search Results"-setting under the "Communications" tab.</small>
 ```
 $spl->getAllSongs(); // returns an array of songs
 // The above is the same as:
 $spl->search('*');
 ```
 
-Searching for a song
+Searching for a song:
 - Use * as a wildcard operator
 - Use | as and end to the query
 Tip: Surround all your queries with the wildcard operator, eg. "*Elvis*"
@@ -61,7 +61,7 @@ Tip: Surround all your queries with the wildcard operator, eg. "*Elvis*"
 $allSongs = $spl->search('Avril Lavigne*'); // returns an array, or false
 ```
 
-Do a song request
+Do a song request:
 ```
 $spl->doRequest('C:/path/to/music - file.mp3'); // returns true or false
 ```
