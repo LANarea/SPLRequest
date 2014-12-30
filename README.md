@@ -73,8 +73,8 @@ Might be subject to the "Max Search Results"-setting under the "Communications" 
 ---
 
 Searching for a song:
-- Use * as a wildcard operator
-- Use | as and end to the query
+- Use * as a wildcard operator (eg. "Avril*" for all songs starting with 'Avril')
+- Use | as an end to the query (eg. "A*|" for a list of all songs starting with an A)
 ```
 $results = $spl->search('Avril Lavigne*'); // returns an array, or false
 ```
