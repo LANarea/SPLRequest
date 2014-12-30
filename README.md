@@ -15,10 +15,22 @@ Preparation
 -----------
 	
 Some (local) settings need to be applied before you can use this script:
-- Set Port for TCP connections to Station Playlist Studio
-- Set path of files that are requestable
-- Possibly: Forward the previously mentioned port so it's reachable from your public IP.
-(To be continued.)
+
+First we need the options pane.
+- Open StudioPlaylist Studio,
+- Open the Options window (Ctrl+O or View > Options)
+
+1. Enable the connection with SPL from the outside:
+- On the left, select the tab named "Communications",
+- Set the port for TCP connections to Station Playlist Studio
+- You don't need to set the "Send Response" value, as far as I know
+- Optionally, but preferably, set an IP Restriction (to the same IP as where the script is running)
+- Possibly: Forward the previously mentioned port so it's reachable from your public IP. This option can be found in your Router's settings or via your ISP
+
+2. Set which directories to make public:
+- On the left, select the tab named "Folder Locations"
+- The input box next to the "Search Folders" label contains the folders where this script can cruise through
+- Don't forget to enable the checkbox for "Include subfolders"
 
 
 Usage
