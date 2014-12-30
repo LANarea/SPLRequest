@@ -93,7 +93,7 @@ $spl->doRequest('C:/path/to/music - file.mp3', 'John Doe', 'Brussels, Belgium');
 
 ---
 
-Alternatively, you could check out the exampe.php file.
+Alternatively, you could check out the example.php file.
 
 Note
 -----
