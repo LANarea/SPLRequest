@@ -16,7 +16,6 @@ Preparation
 	
 Some (local) settings need to be applied before you can use this script:
 
-First we need the options pane.
 * Open StudioPlaylist Studio,
 * Open the Options window (Ctrl+O or View > Options)
 
