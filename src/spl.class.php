@@ -52,11 +52,13 @@ class SPLRequest
      * Use '|' as an endline at the end
      * 
      * @param  string $query        The value we need to search for
+	 * @param  bool $process		Wether or not to internally process the output
      * @return array
      */
-    public function search($query)
+    public function search($query, $process = true)
     {
-        return $this->processSongs($this->doQuery('Search=' . $query, 'Not Found'));
+		$pure_output = $this->doQuery('Search=' . $query, 'Not Found');
+		return ($process === true) ? $this->processSongs($pure_output) : $pure_output;
     }
     
     /**
@@ -87,11 +89,13 @@ class SPLRequest
     
     /**
      * Get a list of the requests in the waitinglist
+	 * @param  bool $process		Wether or not to internally process the output
      * @return array
      */
-    public function getRequests()
-    {
-        return $this->processRequests($this->doQuery('List requests', 'OK'));
+    public function getRequests($process = true)
+    {	
+		$pure_output = $this->doQuery('List requests', 'OK');
+		return ($process === true) ? $this->processRequests($pure_output) : $pure_output;
     }
 
     /**
@@ -108,9 +112,12 @@ class SPLRequest
         {
             if (empty($requests[$i]))
                 continue;
-            list($timestamp, $artist, $title) = explode("|", $requests[$i]);
+            list($timestamp_and_name, $artist, $title) = explode("|", $requests[$i]);
+			list($timestamp, $name) = explode("  ", $timestamp_and_name);
+			$datetime = \DateTime::createFromFormat('d/m/Y H:i', $timestamp);
             $newList[] = array(
-                'ts' => trim($timestamp),
+                'timestamp' => $datetime->format('Y-m-d H:i'),
+                'name' => trim($name),
                 'artist' => trim($artist),
                 'title' => trim($title)
             );
