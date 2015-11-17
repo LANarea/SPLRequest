@@ -174,12 +174,12 @@ class SPLRequest
     
     /**
      * doQuery sends the commands and reads the output going to and coming from SPL
-     * @access private
+     * @access public
      * @param  string $command              The command we send to SPL
      * @param  boolean|string $multi        Do we expect multiple output lines from server, can be the "stop-word" as value
      * @return string|array|boolean         Returns false when failed
      */
-    private function doQuery($command = NULL, $multi = false)
+    public function doQuery($command = NULL, $multi = false)
     {
     
         if (!is_null($command) && !empty($command))
