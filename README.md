@@ -107,7 +107,7 @@ With this package, you can only handle the data we can get to and from SPL.
 Known issues
 ------------
 
-* Special signs like é,ä,û; are rendered as questionmarks. Probably something with the encoding.
+* ~~Special signs like é,ä,û; are rendered as questionmarks. Probably something with the encoding.~~ [UTF-8 output since 5.20]
 
 
 License
