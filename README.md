@@ -28,11 +28,11 @@ Preparation
 	
 Some (local) settings need to be applied before you can use this script:
 
-* Open StationPlaylist Studio,
+* Open StationPlaylist Studio
 * Open the Options window (Ctrl+O or View > Options)
 
 * Enable the connection with SPL from the outside:
-	* On the left, select the tab named "Communications",
+	* On the left, select the tab named "Communications"
 	* Set the port for TCP connections to StationPlaylist Studio
 	* You don't need to set the "Send Response" value, as far as I know
 	* Optionally, but preferably, set an IP Restriction (to the same IP as where the script is running)
