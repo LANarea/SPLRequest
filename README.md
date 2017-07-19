@@ -61,7 +61,7 @@ $spl = new SPLRequest('0.0.0.0', 0);
 
 ---
 
-Get all available songs via this operator:
+Get all available songs via the getAllSongs() method:
 
 ```
 $results = $spl->getAllSongs(); // returns an array of all songs
@@ -88,19 +88,19 @@ Do a song request:
 ```
 $spl->doRequest('C:/path/to/music - file.mp3'); // returns true or false
 ```
-Alternatively you can add even more useful information!
+Alternatively you can add even more useful information:
 ```
 $spl->doRequest('C:/path/to/music - file.mp3', 'John Doe', 'Brussels, Belgium');
 ```
 
 ---
 
-Alternatively, you could check out the example.php file.
+Check out the example.php file for free por.. uh, examples of course.
 
 Note
 -----
 
-You have to implement your own request limits, caching and such.
+You'll have to implement your own request limititations, cacheing, etc.
 
 With this package, you can only handle the data we can get to and from SPL.
 
